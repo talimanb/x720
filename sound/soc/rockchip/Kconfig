@@ -145,6 +145,15 @@ config SND_RK_SOC_RT5631_PHONE
 	  with the RT5631.
 	  Driver code to use on the phone or voice Tablet.
 
+config SND_RK_SOC_RT5670
+	tristate "SoC I2S Audio support for rockchip - rt5670/rt5672"
+	depends on SND_RK_SOC
+	select SND_RK_SOC_I2S
+	select SND_SOC_RT5670
+	help
+	  Say Y if you want to add support for SoC audio on rockchip
+	  with the rt5670.
+
 config SND_RK_SOC_RT5625
 	tristate "SoC I2S Audio support for rockchip - RT5625"
 	depends on SND_RK_SOC

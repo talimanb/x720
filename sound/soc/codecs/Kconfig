@@ -118,6 +118,7 @@ config SND_SOC_ALL_CODECS
 	select SND_SOC_RT5639 if I2C
 	select SND_SOC_RT5616 if I2C
 	select SND_SOC_RT5512 if I2C
+	select SND_SOC_RT5670 if I2C
 	select SND_SOC_RK610 if I2C
 	select SND_SOC_RK616 if I2C
 	select SND_SOC_RK1000 if I2C
@@ -506,6 +507,9 @@ config SND_SOC_RT3224
 config SND_SOC_RT3261
 	select SND_HWDEP
 	tristate
+
+config SND_SOC_RT5670
+       tristate
 
 config SND_SOC_WM8903
 	tristate

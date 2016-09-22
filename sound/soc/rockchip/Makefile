@@ -43,6 +43,7 @@ snd-soc-hdmi-i2s-objs := rk_hdmi_i2s.o
 snd-soc-hdmi-spdif-objs := rk_hdmi_spdif.o
 snd-soc-rt5512-objs := rk_rt5512.o
 snd-soc-cx2070x-objs := rk_cx2070x.o
+snd-soc-rk5670-objs := rk_rt5670.o
 
 obj-$(CONFIG_SND_RK_SOC_WM8994) += snd-soc-wm8994.o
 obj-$(CONFIG_SND_RK_SOC_WM8988) += snd-soc-wm8988.o
@@ -75,3 +76,4 @@ obj-$(CONFIG_SND_RK_SOC_RT5512) += snd-soc-rt5512.o
 obj-$(CONFIG_SND_RK_SOC_CX2070X) += snd-soc-cx2070x.o
 obj-$(CONFIG_SND_RK_SOC_HDMI_I2S) += snd-soc-hdmi-i2s.o
 obj-$(CONFIG_SND_RK_SOC_HDMI_SPDIF) += snd-soc-hdmi-spdif.o
+obj-$(CONFIG_SND_RK_SOC_RT5670) += snd-soc-rt5670.o

@@ -143,6 +143,7 @@ snd-soc-rk616-objs := rk616_codec.o
 snd-soc-rk2928-objs := rk2928_codec.o
 snd-soc-rk3026-objs := rk3026_codec.o
 snd-soc-rk3190-objs := rk3190_codec.o
+snd-soc-rt5670-objs := rt5670.o rt5670-dsp.o rt5670_ioctl.o rt_codec_ioctl.o
 
 
 # Amp
@@ -293,6 +294,7 @@ obj-$(CONFIG_SND_SOC_RK616)	+= snd-soc-rk616.o
 obj-$(CONFIG_SND_SOC_RK2928)	+= snd-soc-rk2928.o
 obj-$(CONFIG_SND_SOC_RK3026)	+= snd-soc-rk3026.o
 obj-$(CONFIG_SND_SOC_RK3190)	+= snd-soc-rk3190.o
+obj-$(CONFIG_SND_SOC_RT5670)    += snd-soc-rt5670.o
 
 # Amp
 obj-$(CONFIG_SND_SOC_MAX9877)	+= snd-soc-max9877.o
