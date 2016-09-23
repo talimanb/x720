@@ -440,9 +440,16 @@
 
 &i2c1 {
 	status = "okay";
+/*
 	rtc@51 {
 		compatible = "nxp,pcf8563";
 		reg = <0x51>;
+	};
+*/
+	stmvl53l0: stmvl53l0@29 {
+		compatible = "st,stmvl53l0";
+		reg = <0x29>;
+		sensor_int = <&gpio0 GPIO_B1 IRQ_TYPE_EDGE_FALLING>;
 	};
 /*	
 	sensor@1d {
@@ -592,12 +599,12 @@
 	status = "okay";
 	rockchip,mirror = <NO_MIRROR>;
 };
-
+/*
 &hdmi {
 	status = "okay";
 	rockchip,hdmi_video_source = <DISPLAY_SOURCE_LCDC1>;
 };
-
+*/
 &adc {
 	status = "okay";
 
