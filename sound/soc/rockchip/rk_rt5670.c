@@ -162,7 +162,7 @@ static int rockchip_rt5670_voice_hw_params(struct snd_pcm_substream *substream,
 
 static const struct snd_soc_dapm_widget rockchip_rt5670_dapm_widgets[] = {
 	SND_SOC_DAPM_MIC("Mic Jack", NULL),
-	SND_SOC_DAPM_MIC("Headset Jack", NULL),	
+//	SND_SOC_DAPM_MIC("Headset Jack", NULL),	 //zhanh
 	SND_SOC_DAPM_SPK("Ext Spk", NULL),
 	SND_SOC_DAPM_HP("Headphone Jack", NULL),
 };
@@ -174,9 +174,10 @@ static const struct snd_soc_dapm_route audio_map[]={
 	{"DMIC R1", NULL, "Mic Jack"},
 	
 	// HP MIC
+/*
 	{"micbias2", NULL, "Headset Jack"},
-    {"IN1N", NULL, "micbias2"},
-
+    	{"IN1N", NULL, "micbias2"},
+*/
 	{"Ext Spk", NULL, "SPOL"},
 	{"Ext Spk", NULL, "SPOR"},
 	{"Headphone Jack", NULL, "HPOL"},
@@ -185,7 +186,7 @@ static const struct snd_soc_dapm_route audio_map[]={
 
 static const struct snd_kcontrol_new rockchip_rt5670_controls[] = {
 	SOC_DAPM_PIN_SWITCH("Mic Jack"),
-	SOC_DAPM_PIN_SWITCH("Headset Jack"),
+//	SOC_DAPM_PIN_SWITCH("Headset Jack"), //zhanh
 	SOC_DAPM_PIN_SWITCH("Ext Spk"),
 	SOC_DAPM_PIN_SWITCH("Headphone Jack"),
 };
@@ -198,9 +199,9 @@ static int rockchip_rt5670_init(struct snd_soc_pcm_runtime *rtd)
 	struct snd_soc_codec *codec = rtd->codec;
 	struct snd_soc_dapm_context *dapm = &codec->dapm;
 
-	DBG("Enter::%s----%d\n",__FUNCTION__,__LINE__);
-
-	/*mutex_lock(&dapm->card->dapm_mutex);
+        DBG("Enter::%s----%d\n",__FUNCTION__,__LINE__);
+/*
+	mutex_lock(&dapm->card->dapm_mutex);
 
 	snd_soc_dapm_enable_pin(dapm, "Mic Jack");
 	snd_soc_dapm_enable_pin(dapm, "Headset Jack");
@@ -209,8 +210,8 @@ static int rockchip_rt5670_init(struct snd_soc_pcm_runtime *rtd)
 
 	mutex_unlock(&dapm->card->dapm_mutex);
 
-	snd_soc_dapm_sync(dapm);*/
-
+	snd_soc_dapm_sync(dapm);
+*/	
 	return 0;
 }
 
@@ -233,7 +234,7 @@ static struct snd_soc_dai_link rockchip_rt5670_dai[] = {
 	{
 		.name = "RT5670 I2S2",
 		.stream_name = "RT5670 PCM2",
-		.codec_dai_name = "rt5670-aif2",
+		.codec_dai_name = "rt5670-aif1", //zhanh "rt5670-aif2"
 		.ops = &rockchip_rt5670_voice_ops,
 	},
 };

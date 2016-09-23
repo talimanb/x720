@@ -54,7 +54,7 @@ module_param(hp_amp_time, int, 0644);
 #define RT5672
 #define RT5670_DET_EXT_MIC 0
 //#define USE_INT_CLK
-#define JD1_FUNC
+//#define JD1_FUNC
 //#define ALC_DRC_FUNC
 #define USE_ASRC
 //#define USE_TDM
@@ -774,6 +774,7 @@ int rt5670_check_interrupt_event(struct snd_soc_codec *codec, int *data)
 	switch (val) {
 	//case 0x0:
 	case 0x20:
+#if 0 //zhanh
 		/* jack insert */
 		if (rt5670->jack_type == 0) {
 			snd_soc_dapm_force_enable_pin(&codec->dapm, "Mic Det Power");
@@ -796,6 +797,7 @@ int rt5670_check_interrupt_event(struct snd_soc_codec *codec, int *data)
 			*data = 0;
 		}
 		return (event_type == 0 ? RT5670_UN_EVENT : event_type);
+#endif
 	case 0x00:
 	default:
 		rt5670->jack_type = rt5670_headset_detect(codec, 0);
@@ -846,7 +848,6 @@ static const char * const rt5670_asrc_clk_source[] = {
 	"clk_i2s3_track", "clk_i2s4_track", "clk_sys2", "clk_sys3",
 	"clk_sys4", "clk_sys5"
 };
-
 static const SOC_ENUM_SINGLE_DECL(rt5670_da_sto_asrc_enum, RT5670_ASRC_2,
 				12, rt5670_asrc_clk_source);
 
@@ -873,7 +874,6 @@ static const SOC_ENUM_SINGLE_DECL(rt5670_ad_monor_asrc_enum, RT5670_ASRC_3,
 
 static const SOC_ENUM_SINGLE_DECL(rt5670_ad_sto2_asrc_enum, RT5670_ASRC_5,
 				12, rt5670_asrc_clk_source);
-
 static const SOC_ENUM_SINGLE_DECL(rt5670_dsp_asrc_enum, RT5670_DSP_CLK,
 				0, rt5670_asrc_clk_source);
 
@@ -1297,6 +1297,7 @@ static const struct snd_kcontrol_new rt5670_snd_controls[] = {
 		rt5670_modem_input_switch_get, rt5670_modem_input_switch_put),
 	SOC_ENUM_EXT("ASRC Switch", rt5670_asrc_enum,
 		rt5670_asrc_get, rt5670_asrc_put),
+
 	SOC_ENUM_EXT("HPMIC Switch", rt5670_hpmic_enum,
 		rt5670_hpmic_get, rt5670_hpmic_put),
 
@@ -2536,7 +2537,8 @@ static const struct snd_soc_dapm_widget rt5670_dapm_widgets[] = {
 #endif
 
 	/* ASRC */
-/*
+//zhanh
+#if 1
 	SND_SOC_DAPM_SUPPLY_S("I2S1 ASRC", 1, RT5670_ASRC_1,
 		11, 0, NULL, 0),
 	SND_SOC_DAPM_SUPPLY_S("I2S2 ASRC", 1, RT5670_ASRC_1,
@@ -2567,7 +2569,7 @@ static const struct snd_soc_dapm_widget rt5670_dapm_widgets[] = {
 		1, 0, NULL, 0),
 	SND_SOC_DAPM_SUPPLY_S("ADC MONO R ASRC", 1, RT5670_ASRC_1,
 		0, 0, NULL, 0),
-*/
+#endif
 	/* Input Side */
 	/* micbias */
 #if 0
@@ -2575,7 +2577,7 @@ static const struct snd_soc_dapm_widget rt5670_dapm_widgets[] = {
 			RT5670_PWR_MB1_BIT, 0),
 	SND_SOC_DAPM_MICBIAS("micbias2", RT5670_PWR_ANLG2,
 			RT5670_PWR_MB2_BIT, 0),
-#else
+//#else //zhanh
     SND_SOC_DAPM_SUPPLY("micbias1", RT5670_PWR_ANLG2,
 		RT5670_PWR_MB1_BIT, 0, NULL, 0),
 	SND_SOC_DAPM_SUPPLY("micbias2", RT5670_PWR_ANLG2,
@@ -2935,7 +2937,6 @@ static const struct snd_soc_dapm_route rt5670_dapm_routes[] = {
 	{ "DAC Mono Left Filter", NULL, "DAC MONO L ASRC", is_using_asrc },
 	{ "DAC Mono Right Filter", NULL, "DAC MONO R ASRC", is_using_asrc },
 	{ "DAC Stereo1 Filter", NULL, "DAC STO ASRC", is_using_asrc },
-	
 	{ "DAC Mono Left Filter", NULL, "PLL1", check_sysclk1_source },
 	{ "DAC Mono Right Filter", NULL, "PLL1", check_sysclk1_source },
 	{ "DAC Stereo1 Filter", NULL, "PLL1", check_sysclk1_source },
@@ -2943,10 +2944,10 @@ static const struct snd_soc_dapm_route rt5670_dapm_routes[] = {
 	{ "I2S1", NULL, "I2S1 ASRC" },
 	{ "I2S2", NULL, "I2S2 ASRC" },
 	{ "I2S DSP", NULL, "I2S2 ASRC" },
-
+/* zhanh
 	{ "micbias1", NULL, "DAC L1 Power" },
 	{ "micbias1", NULL, "DAC R1 Power" },
-
+*/
 	{ "DMIC1", NULL, "DMIC L1" },
 	{ "DMIC1", NULL, "DMIC R1" },
 	{ "DMIC2", NULL, "DMIC L2" },
@@ -4171,8 +4172,15 @@ static int rt5670_probe(struct snd_soc_codec *codec)
 			ARRAY_SIZE(rt5670_dapm_widgets));
 	snd_soc_dapm_add_routes(&codec->dapm, rt5670_dapm_routes,
 			ARRAY_SIZE(rt5670_dapm_routes));
+#if 0 //zhanh
     snd_soc_dapm_force_enable_pin(&codec->dapm, "micbias1");
-	snd_soc_dapm_force_enable_pin(&codec->dapm, "micbias2");
+    snd_soc_dapm_force_enable_pin(&codec->dapm, "micbias2");
+#else
+    snd_soc_dapm_force_enable_pin(&codec->dapm, "DMIC CLK");
+    snd_soc_dapm_force_enable_pin(&codec->dapm, "DMIC1 POWER");
+    snd_soc_dapm_force_enable_pin(&codec->dapm, "DMIC2 POWER");
+
+#endif
 	snd_soc_dapm_sync(&codec->dapm);
 	//rt5670->dsp_sw = RT5670_DSP_NS;
 	//rt5670->dsp_sw = RT5670_DSP_AEC_HANDSFREE;
