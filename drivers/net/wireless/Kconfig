@@ -111,6 +111,10 @@ choice
 		depends on RKWIFI
 		select BCM2079X_NFC
 
+	config AP6356
+		bool "AP6356"
+		depends on RKWIFI
+
 	config GB86302I
 		bool "GB86302I"
 		depends on RKWIFI

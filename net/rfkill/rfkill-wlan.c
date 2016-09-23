@@ -91,6 +91,8 @@ static const char wlan_name[] =
 		"ap6476"
 #elif defined(CONFIG_AP6493)
 		"ap6493"
+#elif defined(CONFIG_AP6356)
+		"ap6356"
 #else
         "wlan_default"
 #endif
@@ -124,6 +126,8 @@ int get_wifi_chip_type(void)
         type = WIFI_AP6476;    
     } else if (strcmp(wifi_chip_type_string, "ap6493") == 0) {
         type = WIFI_AP6493;                    
+    } else if (strcmp(wifi_chip_type_string, "ap6356") == 0) {
+        type = WIFI_AP6356;
     } else if (strcmp(wifi_chip_type_string, "rtl8188eu") == 0) {
         type = WIFI_RTL8188EU;
     } else if (strcmp(wifi_chip_type_string, "rtl8192du") == 0) {
@@ -147,6 +151,8 @@ int get_wifi_chip_type(void)
     } else {
         type = WIFI_AP6210;
     }
+//zhanh: hard coded here
+    type = WIFI_AP6356;
     return type;
 }
 EXPORT_SYMBOL(get_wifi_chip_type);
