@@ -695,6 +695,7 @@ static int rt5670_readable_register(
 
 int rt5670_headset_detect(struct snd_soc_codec *codec, int jack_insert)
 {
+#if 0 //zhanh
 	int jack_type, val;
 	int i = 0, sleep_time[5] = {300, 150, 100, 50, 25};
 	printk("rt5670_headset_detect %d \n",jack_insert);
@@ -743,7 +744,12 @@ int rt5670_headset_detect(struct snd_soc_codec *codec, int jack_insert)
 		snd_soc_update_bits(codec, RT5670_INT_IRQ_ST, 0x8, 0x0);
 		jack_type = 0;
 	}
-
+#else
+	int jack_type=0;
+	snd_soc_update_bits(codec, RT5670_GEN_CTRL3, 0x4, 0x4);
+	snd_soc_update_bits(codec, RT5670_INT_IRQ_ST, 0x8, 0x0);
+	jack_type = 0;
+#endif
 	pr_debug("jack_type=%d\n",jack_type);
 	return jack_type;
 }
@@ -4049,6 +4055,7 @@ static int rt5670_set_bias_level(struct snd_soc_codec *codec,
 		snd_soc_write(codec, RT5670_PWR_ANLG1, 0x0001);
 		snd_soc_write(codec, RT5670_PWR_ANLG2, 0x0000);
 #endif 
+#if 0 //zhanh
 		if (rt5670->jack_type == SND_JACK_HEADSET) {
 			snd_soc_update_bits(codec, RT5670_PWR_ANLG1,
 				RT5670_LDO_SEL_MASK, 0x0006);
@@ -4059,6 +4066,7 @@ static int rt5670_set_bias_level(struct snd_soc_codec *codec,
 			snd_soc_update_bits(codec, RT5670_PWR_VOL,
 				0x0020, 0x0020);
 		}
+#endif
 		break;
 
 	default:
@@ -4157,7 +4165,12 @@ static int rt5670_probe(struct snd_soc_codec *codec)
 	rt5670_check_interrupt_event(codec, &data);
 
 	rt5670->codec = codec;
+#if 0//zhanh
 	rt5670->combo_jack_en = true; /* enable combo jack */
+#else
+	rt5670->combo_jack_en = false; /* enable combo jack */
+#endif
+
 
 	if (rt5670->v_id >= 7) {
 		snd_soc_dapm_new_controls(&codec->dapm, rt5670_new_dapm_widgets,

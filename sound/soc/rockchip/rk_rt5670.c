@@ -164,7 +164,7 @@ static const struct snd_soc_dapm_widget rockchip_rt5670_dapm_widgets[] = {
 	SND_SOC_DAPM_MIC("Mic Jack", NULL),
 //	SND_SOC_DAPM_MIC("Headset Jack", NULL),	 //zhanh
 	SND_SOC_DAPM_SPK("Ext Spk", NULL),
-	SND_SOC_DAPM_HP("Headphone Jack", NULL),
+	//SND_SOC_DAPM_HP("Headphone Jack", NULL),
 };
 
 static const struct snd_soc_dapm_route audio_map[]={
@@ -180,15 +180,15 @@ static const struct snd_soc_dapm_route audio_map[]={
 */
 	{"Ext Spk", NULL, "SPOL"},
 	{"Ext Spk", NULL, "SPOR"},
-	{"Headphone Jack", NULL, "HPOL"},
-	{"Headphone Jack", NULL, "HPOR"},
+	//{"Headphone Jack", NULL, "HPOL"},
+	//{"Headphone Jack", NULL, "HPOR"},
 } ;
 
 static const struct snd_kcontrol_new rockchip_rt5670_controls[] = {
 	SOC_DAPM_PIN_SWITCH("Mic Jack"),
 //	SOC_DAPM_PIN_SWITCH("Headset Jack"), //zhanh
 	SOC_DAPM_PIN_SWITCH("Ext Spk"),
-	SOC_DAPM_PIN_SWITCH("Headphone Jack"),
+	//SOC_DAPM_PIN_SWITCH("Headphone Jack"),
 };
 
 /*
