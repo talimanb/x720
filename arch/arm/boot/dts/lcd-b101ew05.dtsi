@@ -4,32 +4,31 @@
  */
 
 / {
-
+/*
 	backlight {
 		compatible = "pwm-backlight";
 		pwms = <&pwm1 0 10000>;
 		rockchip,pwm_id= <1>;
-		brightness-levels = </*255 254 253 252 251 250 249 248 247 246 245 244 243 242 241 240 239 238 237 236 235 234 233 232 231 230 229 228 227 226 225 224 223 222 221 */220 219 218 217 216 215 214 213 212 211 210 209 208 207 206 205 204 203 202 201 200 199 198 197 196 195 194 193 192 191 190 189 188 187 186 185 184 183 182 181 180 179 178 177 176 175 174 173 172 171 170 169 168 167 166 165 164 163 162 161 160 159 158 157 156 155 154 153 152 151 150 149 148 147 146 145 144 143 142 141 140 139 138 137 136 135 134 133 132 131 130 129 128 127 126 125 124 123 122 121 120 119 118 117 116 115 114 113 112 111 110 109 108 107 106 105 104 103 102 101 100 99 98 97 96 95 94 93 92 91 90 89 88 87 86 85 84 83 82 81 80 79 78 77 76 75 74 73 72 71 70 69 68 67 66 65 64 63 62 61 60 59 58 57 56 55 54 53 52 51 50 49 48 47 46 45 44 43 42 41 40 39 38 37 36 35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0>;
+		brightness-levels = <255 254 253 252 251 250 249 248 247 246 245 244 243 242 241 240 239 238 237 236 235 234 233 232 231 230 229 228 227 226 225 224 223 222 221 220 219 218 217 216 215 214 213 212 211 210 209 208 207 206 205 204 203 202 201 200 199 198 197 196 195 194 193 192 191 190 189 188 187 186 185 184 183 182 181 180 179 178 177 176 175 174 173 172 171 170 169 168 167 166 165 164 163 162 161 160 159 158 157 156 155 154 153 152 151 150 149 148 147 146 145 144 143 142 141 140 139 138 137 136 135 134 133 132 131 130 129 128 127 126 125 124 123 122 121 120 119 118 117 116 115 114 113 112 111 110 109 108 107 106 105 104 103 102 101 100 99 98 97 96 95 94 93 92 91 90 89 88 87 86 85 84 83 82 81 80 79 78 77 76 75 74 73 72 71 70 69 68 67 66 65 64 63 62 61 60 59 58 57 56 55 54 53 52 51 50 49 48 47 46 45 44 43 42 41 40 39 38 37 36 35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0>;
 		default-brightness-level = <128>;
 		enable-gpios = <&gpio8 GPIO_A6 GPIO_ACTIVE_HIGH>;
 	};
-
+*/
 		disp_timings: display-timings {
                         native-mode = <&timing0>;
                         timing0: timing0 {
-				screen-type = <SCREEN_LVDS>;
+				screen-type = <SCREEN_DUAL_LVDS>;
 				lvds-format = <LVDS_8BIT_1>;
 				out-face    = <OUT_P888>;
 				color-mode = <COLOR_RGB>;
-				clock-frequency = <80000000>;
-/*
-				hactive = <1366>;
-				vactive = <768>;
-				hback-porch = <120>;
-				hfront-porch = <152>;
-				vback-porch = <22>;
-				vfront-porch = <12>;
-				hsync-len = <10>;
+				clock-frequency = <71200000>;
+				hactive = <1920>;
+				vactive = <1080>;
+				hback-porch = <48>;
+				hfront-porch = <38>;
+				vback-porch = <20>;
+				vfront-porch = <22>;
+				hsync-len = <8>;
 				vsync-len = <8>;
 				hsync-active = <0>;
 				vsync-active = <0>;
@@ -38,45 +37,6 @@
 				swap-rb = <0>;
 				swap-rg = <0>;
 				swap-gb = <0>;
-*/
-				hactive = <1920>;
-				vactive = <1080>;
-				hback-porch = <16>;
-				hfront-porch = <24>;
-				vback-porch = <10>;
-				vfront-porch = <16>;
-				hsync-len = <10>;
-				vsync-len = <3>;
-				hsync-active = <0>;
-				vsync-active = <0>;
-				de-active = <0>;
-				pixelclk-active = <0>;
-				swap-rb = <0>;
-				swap-rg = <0>;
-				swap-gb = <0>;
-
-/*
-				screen-type = <0x2>;
-				lvds-format = <0x0>;
-				out-face = <0x0>;
-				color-mode = <0x0>;
-				clock-frequency = <0x4c4b400>;
-				hactive = <0x556>;
-				vactive = <0x300>;
-				hback-porch = <0x78>;
-				hfront-porch = <0x98>;
-				vback-porch = <0x16>;
-				vfront-porch = <0xc>;
-				hsync-len = <0xa>;
-				vsync-len = <0x8>;
-				hsync-active = <0x0>;
-				vsync-active = <0x0>;
-				de-active = <0x0>;
-				pixelclk-active = <0x0>;
-				swap-rb = <0x0>;
-				swap-rg = <0x0>;
-				swap-gb = <0x0>;
-*/
 				cabc-lut = <0x0 0x10101 0x20202 0x30303 0x40404 0x50505 0x60606 0x70707 0x80808 0x90909 0xa0a0a 0xb0b0b 0xc0c0c 0xd0d0d 0xe0e0e 0xf0f0f 0x101010 0x111111 0x121212 0x131313 0x141414 0x151515 0x161616 0x171717 0x181818 0x191919 0x1a1a1a 0x1b1b1b 0x1c1c1c 0x1d1d1d 0x1e1e1e 0x1f1f1f 0x202020 0x212121 0x222222 0x232323 0x242424 0x252525 0x262626 0x272727 0x282828 0x292929 0x2a2a2a 0x2b2b2b 0x2c2c2c 0x2d2d2d 0x2e2e2e 0x2f2f2f 0x303030 0x313131 0x323232 0x333333 0x343434 0x353535 0x363636 0x373737 0x383838 0x393939 0x3a3a3a 0x3b3b3b 0x3c3c3c 0x3d3d3d 0x3e3e3e 0x3f3f3f 0x404040 0x414141 0x424242 0x434343 0x444444 0x454545 0x464646 0x474747 0x484848 0x494949 0x4a4a4a 0x4b4b4b 0x4c4c4c 0x4d4d4d 0x4e4e4e 0x4f4f4f 0x505050 0x515151 0x525252 0x535353 0x545454 0x555555 0x565656 0x575757 0x585858 0x595959 0x5a5a5a 0x5b5b5b 0x5c5c5c 0x5d5d5d 0x5e5e5e 0x5f5f5f 0x606060 0x616161 0x626262 0x636363 0x646464 0x656565 0x666666 0x676767 0x686868 0x696969 0x6a6a6a 0x6b6b6b 0x6c6c6c 0x6d6d6d 0x6e6e6e 0x6f6f6f 0x707070 0x717171 0x727272 0x737373 0x747474 0x757575 0x767676 0x777777 0x787878 0x797979 0x7a7a7a 0x7b7b7b 0x7c7c7c 0x7d7d7d 0x7e7e7e 0x7f7f7f 0x808080 0x818181 0x828282 0x838383 0x848484 0x858585 0x868686 0x878787 0x888888 0x898989 0x8a8a8a 0x8b8b8b 0x8c8c8c 0x8d8d8d 0x8e8e8e 0x8f8f8f 0x909090 0x919191 0x929292 0x939393 0x949494 0x959595 0x969696 0x979797 0x989898 0x999999 0x9a9a9a 0x9b9b9b 0x9c9c9c 0x9d9d9d 0x9e9e9e 0x9f9f9f 0xa0a0a0 0xa1a1a1 0xa2a2a2 0xa3a3a3 0xa4a4a4 0xa5a5a5 0xa6a6a6 0xa7a7a7 0xa8a8a8 0xa9a9a9 0xaaaaaa 0xababab 0xacacac 0xadadad 0xaeaeae 0xafafaf 0xb0b0b0 0xb1b1b1 0xb2b2b2 0xb3b3b3 0xb4b4b4 0xb5b5b5 0xb6b6b6 0xb7b7b7 0xb8b8b8 0xb9b9b9 0xbababa 0xbbbbbb 0xbcbcbc 0xbdbdbd 0xbebebe 0xbfbfbf 0xc0c0c0 0xc1c1c1 0xc2c2c2 0xc3c3c3 0xc4c4c4 0xc5c5c5 0xc6c6c6 0xc7c7c7 0xc8c8c8 0xc9c9c9 0xcacaca 0xcbcbcb 0xcccccc 0xcdcdcd 0xcecece 0xcfcfcf 0xd0d0d0 0xd1d1d1 0xd2d2d2 0xd3d3d3 0xd4d4d4 0xd5d5d5 0xd6d6d6 0xd7d7d7 0xd8d8d8 0xd9d9d9 0xdadada 0xdbdbdb 0xdcdcdc 0xdddddd 0xdedede 0xdfdfdf 0xe0e0e0 0xe1e1e1 0xe2e2e2 0xe3e3e3 0xe4e4e4 0xe5e5e5 0xe6e6e6 0xe7e7e7 0xe8e8e8 0xe9e9e9 0xeaeaea 0xebebeb 0xececec 0xededed 0xeeeeee 0xefefef 0xf0f0f0 0xf1f1f1 0xf2f2f2 0xf3f3f3 0xf4f4f4 0xf5f5f5 0xf6f6f6 0xf7f7f7 0xf8f8f8 0xf9f9f9 0xfafafa 0xfbfbfb 0xfcfcfc 0xfdfdfd 0xfefefe 0xffffff>;
                      	};
                };
